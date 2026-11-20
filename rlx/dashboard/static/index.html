@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RLX Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>RLX <span>reinforcement learning, from scratch</span></h1>
+    <div id="conn" class="pill">connecting…</div>
+  </header>
+
+  <main>
+    <aside>
+      <section>
+        <h2>Environment</h2>
+        <select id="env"></select>
+        <p id="env-desc" class="muted"></p>
+      </section>
+
+      <section id="editor" hidden>
+        <h2>Editor</h2>
+        <div class="row">
+          <label>Rows <input id="ed-rows" type="number" min="2" max="16" value="6"></label>
+          <label>Cols <input id="ed-cols" type="number" min="2" max="16" value="8"></label>
+        </div>
+        <div id="palette"></div>
+        <p class="muted">Pick a tile, then click or drag on the grid.</p>
+        <div class="grid2">
+          <label>step <input id="ed-step" type="number" step="any" value="-1"></label>
+          <label>goal <input id="ed-goal" type="number" step="any" value="10"></label>
+          <label>hole <input id="ed-hole" type="number" step="any" value="-10"></label>
+          <label>cliff <input id="ed-cliff" type="number" step="any" value="-100"></label>
+          <label>slip <input id="ed-slip" type="number" step="0.05" min="0" max="1" value="0"></label>
+          <label>max steps <input id="ed-max" type="number" min="1" value="200"></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Algorithm</h2>
+        <select id="algo"></select>
+        <p id="algo-desc" class="muted"></p>
+        <div id="params" class="grid2"></div>
+      </section>
+
+      <section>
+        <h2>Run</h2>
+        <div class="grid2">
+          <label>episodes <input id="episodes" type="number" min="1" value="500"></label>
+          <label>seed <input id="seed" type="number" value="0"></label>
+        </div>
+        <label>delay per episode: <b id="speed-val">20 ms</b>
+          <input id="speed" type="range" min="0" max="300" value="20">
+        </label>
+        <div class="buttons">
+          <button id="train" class="primary">Train</button>
+          <button id="stop">Stop</button>
+          <button id="watch">Watch greedy</button>
+          <button id="play">Play yourself</button>
+        </div>
+      </section>
+    </aside>
+
+    <section class="stage">
+      <div class="toolbar">
+        <div class="seg" id="view">
+          <button data-view="V" class="on">V(s)</button>
+          <button data-view="Q">Q(s,a)</button>
+          <button data-view="none">tiles</button>
+        </div>
+        <label><input type="checkbox" id="show-policy" checked> policy</label>
+        <label><input type="checkbox" id="show-traj" checked> last episode</label>
+        <span id="status" class="muted"></span>
+      </div>
+      <div class="canvas-wrap"><canvas id="grid"></canvas></div>
+      <div class="legend" id="legend"></div>
+      <h2 id="chart-title">Return per episode</h2>
+      <div class="canvas-wrap"><canvas id="chart"></canvas></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
